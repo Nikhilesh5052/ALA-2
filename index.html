@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorful Ball Animation with Dark Gray/Black Background</title>
+  <style>
+    /* Full page setup with dark gray/black background */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      background-color: #1e1e1e;  /* Dark Gray/Black background */
+    }
+
+    /* Ball styles */
+    .ball {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      pointer-events: none; /* Ensures the balls do not interfere with mouse events */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth color and shadow transition */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow effect around balls */
+    }
+
+    /* Bounce animation for all balls */
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-150px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Ball 1 */
+    .ball1 {
+      background-color: #6e0a10; /* Initial color for ball 1 */
+      animation: bounce 2s infinite alternate ease-in-out;
+    }
+
+    /* Ball 2 */
+    .ball2 {
+      background-color: #190773; /* Initial color for ball 2 */
+      animation: bounce 2.5s infinite alternate ease-in-out;
+    }
+
+    /* Ball 3 */
+    .ball3 {
+      background-color: #0e720c; /* Initial color for ball 3 */
+      animation: bounce 3s infinite alternate ease-in-out;
+    }
+
+    /* Active state for changing color on click */
+    .active {
+      background-color: #ff1493; /* Change to pink when clicked */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Three different balls with different classes -->
+  <div class="ball ball1" id="ball1"></div>
+  <div class="ball ball2" id="ball2"></div>
+  <div class="ball ball3" id="ball3"></div>
+
+  <script>
+    // Get the ball elements
+    const ball1 = document.getElementById('ball1');
+    const ball2 = document.getElementById('ball2');
+    const ball3 = document.getElementById('ball3');
+
+    // Function to move the balls with the mouse
+    function moveBall(event) {
+      const ballSize = 50; // Size of the balls
+      const mouseX = event.clientX - ballSize / 2; // Center the ball on the cursor
+      const mouseY = event.clientY - ballSize / 2;
+
+      // Set the position of each ball
+      ball1.style.left = `${mouseX}px`;
+      ball1.style.top = `${mouseY}px`;
+
+      // Offset each ball slightly from the cursor to create variation
+      ball2.style.left = `${mouseX + 60}px`;  // Ball 2 60px to the right
+      ball2.style.top = `${mouseY + 60}px`;   // Ball 2 60px below the cursor
+
+      ball3.style.left = `${mouseX - 60}px`;  // Ball 3 60px to the left
+      ball3.style.top = `${mouseY - 60}px`;   // Ball 3 60px above the cursor
+    }
+
+    // Add event listener for mousemove to track mouse position
+    document.addEventListener('mousemove', moveBall);
+
+    // Change the ball color when clicked
+    ball1.addEventListener('click', () => {
+      ball1.classList.toggle('active');
+    });
+
+    ball2.addEventListener('click', () => {
+      ball2.classList.toggle('active');
+    });
+
+    ball3.addEventListener('click', () => {
+      ball3.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
